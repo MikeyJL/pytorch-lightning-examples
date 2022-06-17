@@ -1,0 +1,5 @@
+pytorch-lightning
+torchvision
+pylint
+black
+pre-commit
