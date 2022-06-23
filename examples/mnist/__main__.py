@@ -1,6 +1,10 @@
-"""A simple example of how pytorch_lightning works.
+"""A simple example with MNIST dataset.
 
-As per instructions from https://github.com/Lightning-AI/lightning.
+As per instructions from https://github.com/Lightning-AI/lightning with addtions.
+
+- Sequential network with 2 layers
+- TensorBoardLogger
+- Early stopping or epochs
 """
 
 from torch.optim import Adam
@@ -11,6 +15,7 @@ from torchvision import transforms
 from torchvision.datasets import MNIST
 from pytorch_lightning import LightningModule, Trainer
 from pytorch_lightning.loggers import TensorBoardLogger
+from pytorch_lightning.callbacks.early_stopping import EarlyStopping
 
 
 class LitAutoEncoder(LightningModule):
@@ -75,7 +80,9 @@ autoencoder = LitAutoEncoder()
 
 # Custom logger
 tb_logger = TensorBoardLogger(save_dir="examples/basic/logs/")
-trainer = Trainer(logger=tb_logger)
+trainer = Trainer(
+    logger=tb_logger, callbacks=[EarlyStopping(monitor="train_loss", mode="min")]
+)
 
 # Initiates training
 trainer.fit(autoencoder, DataLoader(train), DataLoader(val))
