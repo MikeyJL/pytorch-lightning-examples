@@ -81,8 +81,12 @@ autoencoder = LitAutoEncoder()
 # Custom logger
 tb_logger = TensorBoardLogger(save_dir="examples/basic/logs/")
 trainer = Trainer(
-    logger=tb_logger, callbacks=[EarlyStopping(monitor="train_loss", mode="min")]
+    logger=tb_logger,
+    callbacks=[EarlyStopping(monitor="train_loss", mode="min")],
+    max_epochs=100,
 )
 
 # Initiates training
-trainer.fit(autoencoder, DataLoader(train), DataLoader(val))
+trainer.fit(
+    autoencoder, DataLoader(train, num_workers=10), DataLoader(val, num_workers=10)
+)

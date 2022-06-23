@@ -1,0 +1,2 @@
+mnist:
+	python examples/mnist
