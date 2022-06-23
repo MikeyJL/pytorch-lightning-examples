@@ -3,3 +3,4 @@ torchvision
 pylint
 black
 pre-commit
+tensorboard
