@@ -3,8 +3,6 @@
 As per instructions from https://github.com/Lightning-AI/lightning.
 """
 
-# pylint: disable=invalid-name, arguments-differ, too-many-ancestors
-
 from torch.optim import Adam
 from torch.nn.functional import mse_loss
 from torch.nn import Sequential, Linear, ReLU
